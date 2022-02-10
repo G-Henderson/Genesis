@@ -1,0 +1,10 @@
+{
+  "name": "spelling",
+  "commands": [
+    "how do you spell"
+  ],
+  "entry-point": "spelling",
+  "languages": [
+    "en"
+  ]
+}
