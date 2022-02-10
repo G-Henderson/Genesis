@@ -1,6 +1,6 @@
 import os
-#import vlc
-#from subprocess import call
+import vlc
+from subprocess import call
 from gtts import gTTS
 import pyttsx3
 import time

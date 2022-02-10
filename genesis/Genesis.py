@@ -2,7 +2,7 @@
 from distutils.command.config import config
 from utils.configuration import Configuration
 from utils.voice import Voice
-#from utils.voice import Voice
+from utils.LEDArray import LEDArray
 #from utils.updater import updater
 
 class Genesis:
@@ -25,8 +25,11 @@ class Genesis:
         self.position = self.settings["position"]
         self.platform = self.settings["platform"]
 
+        # Create the LED instance
+        self.led_array = LEDArray()
+
         # Create the voice instance
-        voice = Voice()
+        self.voice = Voice(self.genesis_config, self.led_array)
 
 
     # Runs on startup to load settings and modules
