@@ -6,10 +6,9 @@ import pyttsx3
 import time
 from threading import Thread
 from playsound import playsound
+
 from utils.configuration import Configuration
-
-from utils import Voices as Voices
-
+import utils.Voices as Voices
 
 class Voice:
 
@@ -34,7 +33,6 @@ class Voice:
         # Set the language for gTTS
         self.ttsLanguage = self.config_file_path
 
-
     def say(self, speech: str):
         print(speech)
 
@@ -52,7 +50,6 @@ class Voice:
 
         elif (self.my_voice == Voices.MIMIC_2):
             self.speak_mimic_2(speech)
-
 
     def speak_gtts(self, speech: str):
         try:
@@ -103,4 +100,7 @@ class Voice:
             print(e)
 
     def speak_mimic_2(self, speech: str):
+        pass
+
+    def play_media(self, file_name: str):
         pass
