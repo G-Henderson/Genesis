@@ -9,12 +9,18 @@ from playsound import playsound
 
 from utils.configuration import Configuration
 import utils.Voices as Voices
+from utils.LEDArray import LEDArray
 
 class Voice:
 
-    def __init__(self, genesis_config, led_ring) -> None:
+    """
+    Main class for TTS
+    """
 
-        self.my_voice = Voices.PICO
+    def __init__(self, genesis_config: Configuration, led_ring: LEDArray) -> None:
+
+        # Set the default voice (pico)
+        self.my_voice = Voices.DEFAULT
 
         # Setup the pyttsx library
         self.engine = pyttsx3.init()
@@ -33,8 +39,14 @@ class Voice:
         # Set the language for gTTS
         self.ttsLanguage = self.config_file_path
 
-    def say(self, speech: str):
+        # Setup the LED ring
+        self.led_ring = led_ring
+
+    def say(self, speech: str) -> None:
         print(speech)
+
+        # Run speaking animation
+        self.led_ring.speaking()
 
         if (self.my_voice == Voices.GOOGLE_TTS):
             self.speak_gtts(speech)
@@ -51,7 +63,10 @@ class Voice:
         elif (self.my_voice == Voices.MIMIC_2):
             self.speak_mimic_2(speech)
 
-    def speak_gtts(self, speech: str):
+        # Stop speaking animation
+        self.led_ring.reset()
+
+    def speak_gtts(self, speech: str) -> None:
         try:
             # Create TTS object from 'speech' variable
             myObj = gTTS(text=str(speech), lang=self.ttsLanguage, slow=False)
@@ -68,7 +83,7 @@ class Voice:
             print("Error whilst using gTTS:")
             print(e)
 
-    def speak_pyttsx(self, speech: str):
+    def speak_pyttsx(self, speech: str) -> None:
         try:
             # use pyttsx library to speak
             self.engine.say(str(speech))
@@ -80,7 +95,7 @@ class Voice:
             print("Error whilst using pyttsx:")
             print(e)
 
-    def speak_pico(self, speech: str):
+    def speak_pico(self, speech: str) -> None:
         try:
             # Create audio file with speech using PICO library
             call('pico2wave -w response.wav "' + speech + '"', shell=True)
@@ -92,15 +107,15 @@ class Voice:
             print("Error whilst using PICO:")
             print(e)
 
-    def speak_mimic(self, speech: str):
+    def speak_mimic(self, speech: str) -> None:
         try:
             os.system("cd /home/pi/mimic")
         except Exception as e:
             print("Error whilst using Mimic TTS:")
             print(e)
 
-    def speak_mimic_2(self, speech: str):
+    def speak_mimic_2(self, speech: str) -> None:
         pass
 
-    def play_media(self, file_name: str):
+    def play_media(self, file_name: str) -> None:
         pass

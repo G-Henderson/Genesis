@@ -1,6 +1,10 @@
 
 class Module:
 
+    """
+    Parent class for modules
+    """
+
     def __init__(self) -> None:
         pass
 

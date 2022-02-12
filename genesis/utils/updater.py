@@ -5,12 +5,13 @@ import subprocess
 import utils.Platforms as Platforms
 
 class Updater:
+
     """
     Class for checking for updates
     """
 
-    def __init__(self):
-        self.PLATFORM = "rpi"
+    def __init__(self) -> None:
+        self.PLATFORM = Platforms.RASPBERRY_PI
 
     def update(self, voice_instance):
         # Check what platform we are on
@@ -20,20 +21,19 @@ class Updater:
 
         # Check for Genesis updates
         if (self.check_for_genesis_updates()):
-            self.update_code(self.voice_instance)
+            self.update_code(voice_instance)
 
-    def check_for_os_updates():
+    def check_for_os_updates(self):
         """
         Procedure for checking for Raspberry Pi OS updates
-
         """
+
         command = "sudo apt update -y && sudo apt upgrade -y && sudo apt dist-upgrade -y && sudo apt full-upgrade -y"
         os.system(command)
 
-    def check_for_updates():
+    def check_for_genesis_updates(self) -> bool:
         """
         Checks for updates by fetching and pulling the latest code from the GIT repo
-
         Returns true if a restart is required
         """
 
@@ -61,12 +61,12 @@ class Updater:
             restart = True
 
         # Check for Raspberry Pi OS updates
-        check_for_os_updates()
+        self.check_for_os_updates()
 
         # Return whether restart is required
         return restart
 
-    def update_code(voice_instance):
+    def update_code(self, voice_instance):
         """
         Restarts the device and notifies the user
 

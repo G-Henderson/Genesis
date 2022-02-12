@@ -1,6 +1,10 @@
 
 class LEDArray:
 
+    """
+    Class for controlling the LED array
+    """
+
     def __init__(self) -> None:
         pass
 

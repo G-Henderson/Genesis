@@ -7,6 +7,9 @@ CONFIG_FILE_PATH = "config.json"
 
 class Configuration:
 
+    """
+    Class for setting up the configuration of the assistant
+    """
 
     def __init__(self):
         """

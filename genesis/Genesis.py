@@ -1,5 +1,4 @@
 # Import external libraries
-from distutils.command.config import config
 from utils.configuration import Configuration
 from utils.voice import Voice
 from utils.LEDArray import LEDArray
@@ -41,13 +40,13 @@ class Genesis:
         # Create configuration object
         config = Configuration()
 
-        # create config file
+        # Create the configuration file
         config.create_config()
 
-        # check config global file
+        # Check the configuration file
         config.check_global_config(self.CONFIG_HEADER_PATH)
 
-        # load addons
+        # load modules
         config.load_modules(self.CONFIG_PATH, self.MODS_DIR)
 
         # Return the configuration object
