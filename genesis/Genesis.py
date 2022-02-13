@@ -59,8 +59,7 @@ class Genesis:
         """
 
         try:
-            while True:
-                print("Main Loop!")
+            self.voice.say("Hello")
 
         except Exception as e:
             print(e)

@@ -1,3 +1,6 @@
+import board
+import neopixel
+from threading import Thread
 
 class LEDArray:
 
