@@ -29,6 +29,63 @@ class Genesis:
 
         # Create the voice instance
         self.voice = Voice(self.genesis_config, self.led_array)
+        
+        
+    def parse_args(self, command: str, keyword: str) -> list:
+        """
+        Parse command arguments
+        
+        command: the command to parse
+        keyword: the keyword that activate the command
+        
+        example: play song_name
+        using keyword: play
+        returns: [song_name]
+        another example: play song_name by artist
+        using keyword: play
+        returns: [song_name, by, artist]
+        """
+        
+        command_without_keywords = command.replace(keyword, "").strip()
+        return command_without_keywords.split()
+    
+    
+    def execute_command(self, command: str):
+        """
+        Execute the user's command
+        command: the command to execute
+        """
+
+        print(f"Executing {command}")
+        command_executed = False
+        mods = self.config["modules"]
+
+        # Search through mods for command
+        for mod in mods:
+            for command_to_listen_for in mod["commands"]:
+                if command_to_listen_for in command:
+
+                    my_mod = __import__(
+                        f"{self.MODS_DIR}.{mod['name']}.{mod['entry-point']}",
+                        fromlist=["modules"],
+                    )
+
+                    # Any possible errors should be handled by the individual modules
+                    # within the modules, if an error is encountered, they
+                    # will be ignored as to not halt/break the main instance
+                    try:
+                        my_mod.run(
+                            command_to_listen_for,
+                            self.parse_args(command, command_to_listen_for),
+                            self.voice,
+                        )
+                    except:
+                        pass
+
+                    command_executed = True
+
+        if not command_executed:
+            self.voice.say("Sorry, I didn't understand that")
 
 
     # Runs on startup to load settings and modules
