@@ -11,6 +11,10 @@ class LEDArray:
     """
 
     def __init__(self) -> None:
+        # Initiate empty thread variables
+        self.processing_thread = None
+        self.speaking_thread = None
+
         # Setup neopixel variables
         pixel_pin = board.D12 # GPIO 12
         self.num_pixels = 24 # The number of LEDs
