@@ -50,42 +50,78 @@ class Genesis:
         return command_without_keywords.split()
     
     
+    # Executes the command based on the command word in the detected speech
     def execute_command(self, command: str):
         """
-        Execute the user's command
+        execute user command
+
         command: the command to execute
         """
 
         print(f"Executing {command}")
         command_executed = False
-        mods = self.config["modules"]
+        modules = self.my_config["modules"]
 
-        # Search through mods for command
-        for mod in mods:
-            for command_to_listen_for in mod["commands"]:
+        # match command to addon
+        for my_mod in modules:
+            for command_to_listen_for in my_mod["commands"]:
                 if command_to_listen_for in command:
 
-                    my_mod = __import__(
-                        f"{self.MODS_DIR}.{mod['name']}.{mod['entry-point']}",
-                        fromlist=["modules"],
+                    name = my_mod['name']
+                    my_addon_imported = __import__(
+                        f"{self.MODS_DIR}.{name}.{my_mod['entry-point']}",
+                        fromlist=[f"modules.{name}"],
                     )
 
-                    # Any possible errors should be handled by the individual modules
-                    # within the modules, if an error is encountered, they
+                    # any possible errors should be handeled by developers
+                    # within their addons, if an error is encountered, they
                     # will be ignored as to not halt/break the main instance
                     try:
-                        my_mod.run(
+                        # Parse extras to the addon (if required)
+                        if str(name) == "homecontrol":
+                            extra = self.homeHub
+                        elif str(name) == "lists":
+                            extra = self.homeHub
+                        elif str(name) == "timers":
+                            extra = self.timers
+                        elif str(name) == "general":
+                            extra = self.alarms
+                        elif str(name) == "system":
+                            extra = self.timers
+                        else:
+                            extra = "None"
+
+                        my_return = my_addon_imported.run(
+                            extra,
                             command_to_listen_for,
                             self.parse_args(command, command_to_listen_for),
-                            self.voice,
+                            self.voice_instance,
                         )
-                    except:
-                        pass
+
+                        # Get the return of the addon (if necessary)
+                        if str(name) == "homecontrol":
+                            pass
+
+                        elif str(name) == "timers":
+                            if (my_return != None):
+                                self.timers = my_return
+
+                        elif str(name) == "general":
+                            if (my_return != None):
+                                self.alarms = my_return
+
+                    except Exception as e:
+                        print(e)
 
                     command_executed = True
 
         if not command_executed:
-            self.voice.say("Sorry, I didn't understand that")
+            self.voice_instance.say("Sorry, I didn't understand that")
+
+        # Set wake-word file back to 0
+        #f = open("wake-word.txt", "w")
+        #f.write("0")
+        #f.close()
 
 
     # Runs on startup to load settings and modules
