@@ -1,8 +1,12 @@
 # Import external libraries
+import importlib
+
+# Import Genesis libraries
 from utils.configuration import Configuration
 from utils.voice import Voice
 from utils.LEDArray import LEDArray
 #from utils.updater import updater
+import utils.Platforms as Platforms
 
 class Genesis:
 
@@ -25,7 +29,10 @@ class Genesis:
         self.platform = self.settings["platform"]
 
         # Create the LED instance
-        self.led_array = LEDArray()
+        if (self.platform == Platforms.RASPBERRY_PI):
+            self.led_array = LEDArray()
+        else:
+            self.led_array = None
 
         # Create the voice instance
         self.voice = Voice(self.genesis_config, self.led_array)
@@ -68,9 +75,8 @@ class Genesis:
                 if command_to_listen_for in command:
 
                     name = my_mod['name']
-                    my_addon_imported = __import__(
-                        f"{self.MODS_DIR}.{name}.{my_mod['entry-point']}",
-                        fromlist=[f"modules.{name}"],
+                    my_mod_imported = importlib.import_module(
+                        f"{self.MODS_DIR}.{name}.{my_mod['entry-point']}"
                     )
 
                     # any possible errors should be handeled by developers
@@ -89,14 +95,17 @@ class Genesis:
                         elif str(name) == "system":
                             extra = self.timers
                         else:
-                            extra = "None"
+                            extra = None
 
-                        my_return = my_addon_imported.run(
-                            extra,
+                        # Setup the Module as a new object and parse the required variables
+                        my_mod_obj = my_mod_imported.Module(
                             command_to_listen_for,
                             self.parse_args(command, command_to_listen_for),
-                            self.voice_instance,
+                            self.voice,
+                            extra
                         )
+
+                        my_mod_obj.run() # Run the module
 
                         # Get the return of the addon (if necessary)
                         if str(name) == "homecontrol":
