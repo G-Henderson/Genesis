@@ -1,3 +1,4 @@
+from threading import Thread
 import sounddevice as sd
 from scipy.io.wavfile import write
 import librosa
@@ -20,7 +21,7 @@ class WakewordListener:
         self.listening = False
         self.model = load_model("wake_word_models/Genesis.h5")
 
-    def _run_wake_word_detection(self) -> None:
+    def run_wake_word_detection(self) -> None:
         while self.listening:
             print("Say Now: ")
             myrecording = sd.rec(int(seconds * fs), samplerate=fs, channels=2)
@@ -42,7 +43,14 @@ class WakewordListener:
                 print("Confidence:", prediction[:, 0])
 
     def start_listening(self):
-        pass
+        try:
+            # Set listening to true
+            self.listening = True
+
+            # Create a new thread
+            t = Thread(name="wake-word-thread", target=self.run_wake_word_detection)
+        except:
+            pass
 
     def stop_listening(self):
         self.listening = False
