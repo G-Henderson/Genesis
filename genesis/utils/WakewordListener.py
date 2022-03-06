@@ -4,11 +4,12 @@ from scipy.io.wavfile import write
 import librosa
 import numpy as np
 from tensorflow.keras.models import load_model
+from threading import Thread
 
-fs = 44100
-seconds = 2
-filename = "prediction.wav"
-class_names = ["Wake Word NOT Detected", "Wake Word Detected"]
+FS = 44100
+SECONDS = 2
+FILENAME = "audio/prediction.wav"
+CLASS_NAMES = ["NOT Detected", "Detected"]
 
 class WakewordListener:
 
@@ -24,11 +25,11 @@ class WakewordListener:
     def run_wake_word_detection(self) -> None:
         while self.listening:
             print("Say Now: ")
-            myrecording = sd.rec(int(seconds * fs), samplerate=fs, channels=2)
+            myrecording = sd.rec(int(SECONDS * FS), samplerate=FS, channels=2)
             sd.wait()
-            write(filename, fs, myrecording)
+            write(FILENAME, FS, myrecording)
 
-            audio, sample_rate = librosa.load(filename)
+            audio, sample_rate = librosa.load(FILENAME)
             mfcc = librosa.feature.mfcc(y=audio, sr=sample_rate, n_mfcc=40)
             mfcc_processed = np.mean(mfcc.T, axis=0)
 

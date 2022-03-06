@@ -1,0 +1,40 @@
+{
+    "jokes": [
+        {
+            "question":"How can you tell if a violist is playing out of tune?",
+            "answer":"You can see the bow moving."
+        },
+        {
+            "question":"What's the difference between a viola and a vacuum cleaner?",
+            "answer":"A vacuum cleaner has to be plugged in before it sucks."
+        },
+        {
+            "question":"Do you know what perfect pitch is?",
+            "answer":"When you throw a viola down a well and it doesn't hit the sides."
+        },
+        {
+            "question":"Why don't violists play hide and seek?",
+            "answer":"Because no-one would look for them."
+        },
+        {
+            "question":"What's the difference between a violist and a dog?",
+            "answer":"A dog is able to stop scratching."
+        },
+        {
+            "question":"How do you keep your violin from being stolen?",
+            "answer":"Put it in a viola case."
+        },
+        {
+            "question":"What's the similarity between lighting and a violist's fingers?",
+            "answer":"They never strike the same place twice."
+        },
+        {
+            "question":"What's the difference between the first and last desk of the viola section?",
+            "answer":"About half a bar."
+        },
+        {
+            "question":"How do you get two violists to play in tune with each other?",
+            "answer":"Ask one to leave."
+        }
+    ]
+}

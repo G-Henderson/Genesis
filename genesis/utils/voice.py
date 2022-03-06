@@ -1,3 +1,4 @@
+"""
 import os
 import vlc
 from subprocess import call
@@ -6,6 +7,7 @@ import pyttsx3
 import time
 from threading import Thread
 from playsound import playsound
+"""
 
 from utils.configuration import Configuration
 import utils.Voices as Voices
@@ -56,7 +58,7 @@ class Voice:
 
         elif (self.my_voice == Voices.PICO):
             self.speak_pico(speech)
-
+            
         elif (self.my_voice == Voices.MIMIC):
             self.speak_mimic(speech)
 
