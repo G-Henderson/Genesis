@@ -38,7 +38,7 @@ class Voice:
         self.media_playlist = vlc.MediaListPlayer()
 
         # Set the language for gTTS
-        self.ttsLanguage = self.config_file_path
+        self.ttsLanguage = self.settings["language"]
 
         # Setup the LED ring
         self.led_ring = led_ring
