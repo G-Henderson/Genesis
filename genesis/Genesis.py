@@ -1,5 +1,6 @@
 # Import external libraries
 import importlib
+from genesis.utils.WakewordListener import WakewordListener
 
 # Import Genesis libraries
 from utils.configuration import Configuration
@@ -36,6 +37,9 @@ class Genesis:
 
         # Create the voice instance
         self.voice = Voice(self.genesis_config, self.led_array)
+
+        # Create the wake-word listener
+        self.wake_word_listener = WakewordListener()
         
         
     def parse_args(self, command: str, keyword: str) -> list:
@@ -161,7 +165,9 @@ class Genesis:
         """
 
         try:
-            self.voice.say("Hello")
+            self.voice.say("Hello. I am Genesis")
+
+            self.wake_word_listener.start_listening()
 
         except Exception as e:
             print(e)
