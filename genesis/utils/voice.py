@@ -1,4 +1,3 @@
-"""
 import os
 import vlc
 from subprocess import call
@@ -7,7 +6,7 @@ import pyttsx3
 import time
 from threading import Thread
 from playsound import playsound
-"""
+
 
 from utils.configuration import Configuration
 import utils.Voices as Voices
