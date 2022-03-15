@@ -29,7 +29,7 @@ class Voice:
         self.genesis_config = genesis_config
         self.my_config = self.genesis_config.load_configuration()
         self.settings = self.my_config["settings"]
-        self.position = self.settings["position"]
+        self.location = self.settings["location"]
         self.platform = self.settings["platform"]
 
         # Create vlc instance
