@@ -1,3 +1,4 @@
+from threading import Thread
 import sounddevice as sd
 from scipy.io.wavfile import write
 import librosa
@@ -39,7 +40,23 @@ class WakewordListener:
                 pass
 
     def start_listening(self):
-        pass
+        try:
+            # Set listening to true
+            self.listening = True
+
+            # Create a new thread
+            self.t = Thread(name="wake-word-thread", target=self.run_wake_word_detection)
+
+            # Start the new thread
+            self.t.start()
+        except:
+            pass
 
     def stop_listening(self):
         self.listening = False
+
+        # Try joining the thread
+        try:
+            self.t.join()
+        except:
+            pass

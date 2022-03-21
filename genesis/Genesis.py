@@ -7,6 +7,7 @@ from utils.voice import Voice
 from utils.LEDArray import LEDArray
 #from utils.updater import updater
 import utils.Platforms as Platforms
+from utils.WakewordListener import WakewordListener
 
 class Genesis:
 
@@ -25,7 +26,7 @@ class Genesis:
 
         self.my_config = self.genesis_config.load_configuration()
         self.settings = self.my_config["settings"]
-        self.position = self.settings["position"]
+        self.location = self.settings["location"]
         self.platform = self.settings["platform"]
 
         # Create the LED instance
@@ -36,6 +37,9 @@ class Genesis:
 
         # Create the voice instance
         self.voice = Voice(self.genesis_config, self.led_array)
+
+        # Create the wake-word listener
+        self.wake_word_listener = WakewordListener()
         
         
     def parse_args(self, command: str, keyword: str) -> list:
@@ -161,7 +165,9 @@ class Genesis:
         """
 
         try:
-            self.voice.say("Hello")
+            self.voice.say("Hello. I am Genesis")
+
+            self.wake_word_listener.start_listening()
 
         except Exception as e:
             print(e)

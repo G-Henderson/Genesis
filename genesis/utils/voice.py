@@ -1,4 +1,3 @@
-"""
 import os
 import vlc
 from subprocess import call
@@ -7,7 +6,7 @@ import pyttsx3
 import time
 from threading import Thread
 from playsound import playsound
-"""
+
 
 from utils.configuration import Configuration
 import utils.Voices as Voices
@@ -30,7 +29,7 @@ class Voice:
         self.genesis_config = genesis_config
         self.my_config = self.genesis_config.load_configuration()
         self.settings = self.my_config["settings"]
-        self.position = self.settings["position"]
+        self.location = self.settings["location"]
         self.platform = self.settings["platform"]
 
         # Create vlc instance
@@ -39,7 +38,7 @@ class Voice:
         self.media_playlist = vlc.MediaListPlayer()
 
         # Set the language for gTTS
-        self.ttsLanguage = self.config_file_path
+        self.ttsLanguage = self.settings["language"]
 
         # Setup the LED ring
         self.led_ring = led_ring
