@@ -34,13 +34,9 @@ class WakewordListener:
 
             prediction = self.model.predict(np.expand_dims(mfcc_processed, axis=0))
             if prediction[:, 1] > 0.99:
-                print(f"Wake Word Detected for ({i})")
+                print("Wake Word Detected")
                 print("Confidence:", prediction[:, 1])
-                i += 1
-            
-            else:
-                print(f"Wake Word NOT Detected")
-                print("Confidence:", prediction[:, 0])
+                pass
 
     def start_listening(self):
         pass
