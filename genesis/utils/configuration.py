@@ -17,6 +17,7 @@ class Configuration:
         """
         self.config_file_name = CONFIG_FILE_PATH
         self.config_header_name = "config_header.json"
+        self.mod_config_file_name = "mod_config.json"
 
 
     def setConfig_file_name(self, config_file_name: str):
@@ -153,7 +154,7 @@ class Configuration:
             self.load_configuration(os.path.join(subdir, file))
             for subdir, dirs, files in os.walk(modules_dir)
             for file in files
-            if file == self.config_file_name
+            if file == self.mod_config_file_name
         ]
 
 

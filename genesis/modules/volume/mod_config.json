@@ -1,0 +1,13 @@
+{
+  "name": "volume",
+  "commands": [
+    "set volume to"
+  ],
+  "entry-point": "volume",
+  "languages": [
+    "en"
+  ],
+  "required_packages": [
+    "alsaaudio"
+  ]
+}

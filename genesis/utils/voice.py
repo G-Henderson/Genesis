@@ -7,7 +7,6 @@ import time
 from threading import Thread
 from playsound import playsound
 
-
 from utils.configuration import Configuration
 import utils.Voices as Voices
 from utils.LEDArray import LEDArray

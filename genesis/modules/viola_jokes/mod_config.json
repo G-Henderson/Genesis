@@ -1,0 +1,14 @@
+{
+  "name": "viola_jokes",
+  "commands": [
+    "tell me a viola joke",
+    "tell us a viola joke"
+  ],
+  "entry-point": "viola_jokes",
+  "languages": [
+    "en"
+  ],
+  "required_packages": [
+    "json"
+  ]
+}

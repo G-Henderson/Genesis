@@ -20,6 +20,7 @@ class Genesis:
         self.CONFIG_PATH = "config.json"
         self.CONFIG_HEADER_PATH = "config_header.json"
         self.MODS_DIR = "modules"
+        self.WAKE_WORD_FILE = "/home/pi/Genesis/genesis/HotwordDetectedTransfer.txt"
 
         # Setup Genesis
         self.genesis_config = self.setup()
@@ -109,7 +110,7 @@ class Genesis:
                             extra
                         )
 
-                        my_mod_obj.run() # Run the module
+                        my_return = my_mod_obj.run() # Run the module
 
                         # Get the return of the addon (if necessary)
                         if str(name) == "homecontrol":
@@ -129,12 +130,7 @@ class Genesis:
                     command_executed = True
 
         if not command_executed:
-            self.voice_instance.say("Sorry, I didn't understand that")
-
-        # Set wake-word file back to 0
-        #f = open("wake-word.txt", "w")
-        #f.write("0")
-        #f.close()
+            self.voice.say("I'm sorry, I didn't understand that")
 
 
     # Runs on startup to load settings and modules
@@ -165,9 +161,27 @@ class Genesis:
         """
 
         try:
-            self.voice.say("Hello. I am Genesis")
+            # Say hello to let the user know the program is now ready
+            self.voice.say("Hello.")
 
+            # Start the wake word listener
             self.wake_word_listener.start_listening()
+
+            while True:              
+                # Check for hotword
+                f=open(self.WAKE_WORD_FILE, "r")
+                contents = f.read()
+                if contents == "1":
+                    # Stop the wake word listener
+                    self.wake_word_listener.stop_listening()
+
+                    # Set the wake word file back to "0" (neutral)
+                    f = open(self.WAKE_WORD_FILE, "w")
+                    f.write("0")
+                    f.close()
+
+                    # Start the wake word listener
+                    self.wake_word_listener.start_listening()
 
         except Exception as e:
             print(e)
