@@ -20,7 +20,7 @@ class Configuration:
         self.mod_config_file_name = "mod_config.json"
 
 
-    def setConfig_file_name(self, config_file_name: str):
+    def setConfig_file_name(self, config_file_name: str) -> None:
         """
         set the config file path
         """

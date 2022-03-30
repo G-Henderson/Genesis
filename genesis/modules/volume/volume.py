@@ -1,51 +1,76 @@
 import alsaaudio
 from time import sleep
-
 import paho.mqtt.client as mqtt
 import paho.mqtt.publish as publish
+from random import randint
+
+from utils.voice import Voice
 
 
-# Send data to the MQTT Server
-def sendData(voice_instance, address, payload, my_retain, iter=0):
-    try:
-        print(f"Publishing to MQTT server")
-        publish.single(address, payload, retain=my_retain, hostname="homehub.home")
+class Module:
 
-    except:
-        if (iter < 3):
-            voice_instance.say("Failed to publish data to the home hub. Trying again in 5 seconds...")
-            sleep(5)
-            sendData(voice_instance, address, payload, my_retain, iter+1)
-        else:
-            voice_instance.say("Data sending failed...")
+    """
+    Module for adjusting the volume the device
+    """
 
-# Change volume
-def changeVol(vol, voice_instance, m):
-    try:
-        m.setvolume(int(vol))
+    def __init__(self, command: str, args: list, voice_instance: Voice, extras) -> None:
+        # Initialise variables from the arguments
+        self.command = command
+        self.args = args
+        self.voice = voice_instance
+        self.extras = extras
 
-        speech = "Volume set to "+vol+" percent"
-        voice_instance.say(speech)
+        # Setup other variables
+        self.VOLUME_TOPIC = "data/kitchen/genesis/volume"
 
-        # Send to MQTT Server
-        sendData(voice_instance, "data/kitchen/genesis/volume", str(vol), True)
 
-    except:
-        voice_instance.say('Error setting volume!')
+    # Send data to the MQTT Server
+    def sendData(self, voice_instance: Voice, address: str, payload: str, my_retain: bool, iter=0) -> None:
+        try:
+            print(f"Publishing to MQTT server")
+            publish.single(address, payload, retain=my_retain, hostname="homehub.home")
 
-# Remove any other characters from the string
-def stripString(begin):
-    end = ""
-    numbers = "0123456789"
-    for i in range(len(begin)):
-        if (begin[i] in numbers):
-            end += begin[i]
+        except:
+            if (iter < 3):
+                voice_instance.say("Failed to publish data to the home hub. Trying again in 5 seconds...")
+                sleep(5)
+                self.sendData(voice_instance, address, payload, my_retain, iter+1)
+            else:
+                voice_instance.say("Data sending failed...")
 
-    return end
+    # Change volume
+    def changeVol(self, vol: str, voice_instance: Voice, m: alsaaudio.Mixer) -> None:
+        try:
+            m.setvolume(int(vol))
 
-# Main procedure
-def run(extras, cmd, args, voice_instance):
-    m = alsaaudio.Mixer()
+            responses = [f"Volume set to {vol} percent", f"I've set the volume to {vol} percent", f"Volume at {vol} percent"]
+            speech = "Volume set to "+vol+" percent"
+            voice_instance.say(speech)
 
-    str_volume = stripString(args[-1])
-    changeVol(str_volume, voice_instance, m)
+            # Send to MQTT Server
+            self.sendData(voice_instance, self.VOLUME_TOPIC, str(vol), True)
+
+        except:
+            voice_instance.say('Error setting volume!')
+
+    # Remove any other characters from the string
+    def stripString(self, begin: str) -> str:
+        # Create new empty string for return
+        end = ""
+        # Setup 
+        NUMBERS = "0123456789"
+        for i in range(len(begin)):
+            if (begin[i] in NUMBERS):
+                end += begin[i]
+
+        return end
+
+    # Main procedure
+    def run(self) -> None:
+        # Setup the audio mixer object
+        m = alsaaudio.Mixer()
+
+        # Get the new audio level from the speech args
+        str_volume = self.stripString(self.args[-1])
+        # Set the new volume
+        self.changeVol(str_volume, self.voice_instance, m)
