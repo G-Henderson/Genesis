@@ -1,11 +1,12 @@
 # Import external libraries
 import importlib
+from gpiozero import Button
 
 # Import Genesis libraries
 from utils.configuration import Configuration
 from utils.voice import Voice
 from utils.LEDArray import LEDArray
-#from utils.updater import updater
+from utils.updater import updater
 import utils.Platforms as Platforms
 from utils.WakewordListener import WakewordListener
 
@@ -29,12 +30,18 @@ class Genesis:
         self.settings = self.my_config["settings"]
         self.location = self.settings["location"]
         self.platform = self.settings["platform"]
+        self.device = self.settings["device"]
 
         # Create the LED instance
         if (self.platform == Platforms.RASPBERRY_PI):
             self.led_array = LEDArray()
         else:
             self.led_array = None
+
+        # Setup buttons
+        if (self.platform == Platforms.RASPBERRY_PI):
+            self.mute_button = Button()
+            self.multi_button = Button()
 
         # Create the voice instance
         self.voice = Voice(self.genesis_config, self.led_array)

@@ -57,8 +57,9 @@ class Module:
     def stripString(self, begin: str) -> str:
         # Create new empty string for return
         end = ""
-        # Setup 
+        # Setup string containing all digits
         NUMBERS = "0123456789"
+        # Loop through the sting and remove any characters that aren't in the numbers string
         for i in range(len(begin)):
             if (begin[i] in NUMBERS):
                 end += begin[i]
