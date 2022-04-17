@@ -13,13 +13,18 @@ class Module:
 
     def get_joke(self) -> str:
         # Read in the jokes array from the json file
+        my_file = open('jokes.json')
+        data = json.load(my_file)
+        jokes_array = data["jokes"]
 
         # Generate a random number from the list of indexs
+        my_index = randint(0,len(jokes_array)-1)
 
-        # Get the jokes at that index
+        # Get the joke at that index
+        my_joke = jokes_array[my_index]
 
         # Return the question and punch line
-        return "", ""
+        return my_joke["question"], my_joke["answer"]
 
     def run(self) -> None:
         # Get a random joke
