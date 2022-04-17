@@ -6,7 +6,6 @@ from gpiozero import Button
 from utils.configuration import Configuration
 from utils.voice import Voice
 from utils.LEDArray import LEDArray
-from utils.updater import updater
 import utils.Platforms as Platforms
 from utils.WakewordListener import WakewordListener
 
