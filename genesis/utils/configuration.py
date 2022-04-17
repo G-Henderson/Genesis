@@ -49,6 +49,7 @@ class Configuration:
             "language": "en",
             "location": "kitchen",
             "platform": "rpi",
+            "device": "custom",
             "voice": "pico"
             },
             "modules": [
@@ -100,7 +101,7 @@ class Configuration:
         # Load the config from the configuration file
         config = self.load_configuration(config_path)
         # Create a list of settings required from the config file
-        required_settings = ["name", "language", "location", "platform", "voice"]
+        required_settings = ["name", "language", "location", "platform", "voice", "device"]
 
         # Iterate through all the settings in the required list
         for setting in required_settings:
