@@ -39,8 +39,8 @@ class Genesis:
 
         # Setup buttons
         if (self.platform == Platforms.RASPBERRY_PI):
-            self.mute_button = Button()
-            self.multi_button = Button()
+            self.mute_button = Button(17)
+            self.multi_button = Button(27)
 
         # Create the voice instance
         self.voice = Voice(self.genesis_config, self.led_array)
