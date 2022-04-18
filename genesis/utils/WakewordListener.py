@@ -20,7 +20,7 @@ class WakewordListener:
 
     def __init__(self) -> None:
         self.listening = False
-        self.model = load_model("wake_word_models/Genesis.h5")
+        self.model = load_model("/home/pi/genesis-main-old/genesis/wake_word_models/Genesis.h5")
 
     def run_wake_word_detection(self) -> None:
         while self.listening:
