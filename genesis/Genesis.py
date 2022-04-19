@@ -54,7 +54,7 @@ class Genesis:
         self.wake_word_listener = WakewordListener(self)
 
         # Setup speech to text object
-        self.recogniser = Recogniser(self.my_config, self.led_array, self.voice)
+        self.recogniser = Recogniser(self.genesis_config, self.led_array, self.voice)
         
         
     def parse_args(self, command: str, keyword: str) -> list:
