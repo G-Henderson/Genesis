@@ -38,7 +38,7 @@ class WakewordListener:
             if prediction[:, 1] > 0.9999999:
                 print("Wake Word Detected")
                 print("Confidence:", prediction[:, 1])
-                break
+                self.listening = False
 
     def start_listening(self):
         try:
