@@ -32,10 +32,6 @@ class Genesis:
         self.platform = self.settings["platform"]
         self.device = self.settings["device"]
 
-        # Setup the updater
-        self.updater = Updater()
-        self.updater.update() # Update code
-
         # Create the LED instance
         if (self.platform == Platforms.RASPBERRY_PI):
             self.led_array = LEDArray()
@@ -49,6 +45,10 @@ class Genesis:
 
         # Create the voice instance
         self.voice = Voice(self.genesis_config, self.led_array)
+
+        # Setup the updater
+        self.updater = Updater()
+        self.updater.update(self.voice) # Update code
 
         # Create the wake-word listener
         self.wake_word_listener = WakewordListener()
