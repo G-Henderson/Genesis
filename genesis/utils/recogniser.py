@@ -30,7 +30,7 @@ class Recogniser:
         self.error_msg = "__error__"
         self.unknown_msg = "__unknown__"
 
-    def play_listening_noise(self, voice_instance: Voice) -> None:
+    def play_listening_noise(self) -> None:
         """
         Plays the listening noise
 
@@ -38,7 +38,7 @@ class Recogniser:
         """
 
         # Create a new thread for playing the noise asynchronously
-        t = Thread(name="listening_noise", target=voice_instance.play_media("audio/Wah.mp3"))
+        t = Thread(name="listening_noise", target=self.voice_instance.play_media("audio/Wah.mp3"))
         # Start the thread
         t.start()
 
@@ -53,7 +53,7 @@ class Recogniser:
             self.recogniser.adjust_for_ambient_noise(source)
 
         # Play the listening noise
-        self.play_listening_noise(voice_instance)
+        self.play_listening_noise()
 
         # Play the listening animation
         self.led_array.listening()

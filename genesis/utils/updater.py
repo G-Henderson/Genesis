@@ -65,9 +65,6 @@ class Updater:
             # Set restart to true
             restart = True
 
-        # Check for Raspberry Pi OS updates
-        self.check_for_os_updates()
-
         # Return whether restart is required
         return restart
 

@@ -187,6 +187,9 @@ class Genesis:
                     voice_input = self.recogniser.recognise()
                     self.execute_command(voice_input)
 
+                    # Start the wake word listener
+                    self.wake_word_listener.start_listening()
+
         except Exception as e:
             print(e)
 
