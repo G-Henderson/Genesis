@@ -18,7 +18,8 @@ class WakewordListener:
     E.g Genesis, Alexa, Hey Google
     """
 
-    def __init__(self) -> None:
+    def __init__(self, genesis_obj) -> None:
+        self.genesis_obj = genesis_obj
         self.listening = False
         self.model = load_model("/home/pi/genesis-main-old/genesis/wake_word_models/Genesis.h5")
 
@@ -60,3 +61,9 @@ class WakewordListener:
             self.t.join()
         except:
             pass
+
+    def setListening(self, listening: bool) -> None:
+        self.listening = listening
+
+    def getListening(self) -> bool:
+        return self.listening

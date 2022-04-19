@@ -21,7 +21,8 @@ class Updater:
         # Check what platform we are on
         if (self.PLATFORM == Platforms.RASPBERRY_PI):
             # Check for Raspberry Pi OS updates
-            self.check_for_os_updates()
+            #self.check_for_os_updates()
+            pass # Whilst debugging
 
         # Check for Genesis updates
         if (self.check_for_genesis_updates()):
@@ -32,7 +33,7 @@ class Updater:
         Procedure for checking for Raspberry Pi OS updates
         """
 
-        command = "sudo apt update -y && sudo apt upgrade -y && sudo apt dist-upgrade -y && sudo apt full-upgrade -y"
+        command = "sudo apt update -y && sudo apt upgrade -y && sudo apt dist-upgrade -y && sudo apt full-upgrade -y && sudo apt autoremove -y"
         os.system(command)
 
     def check_for_genesis_updates(self) -> bool:

@@ -9,6 +9,7 @@ from utils.LEDArray import LEDArray
 import utils.Platforms as Platforms
 from utils.WakewordListener import WakewordListener
 from utils.updater import Updater
+from utils.recogniser import Recogniser
 
 class Genesis:
 
@@ -21,7 +22,6 @@ class Genesis:
         self.CONFIG_PATH = "config.json"
         self.CONFIG_HEADER_PATH = "config_header.json"
         self.MODS_DIR = "modules"
-        self.WAKE_WORD_FILE = "/home/pi/Genesis/genesis/HotwordDetectedTransfer.txt"
 
         # Setup Genesis
         self.genesis_config = self.setup()
@@ -51,7 +51,10 @@ class Genesis:
         self.updater.update(self.voice) # Update code
 
         # Create the wake-word listener
-        self.wake_word_listener = WakewordListener()
+        self.wake_word_listener = WakewordListener(self)
+
+        # Setup speech to text object
+        self.recogniser = Recogniser(self.my_config, self.led_array)
         
         
     def parse_args(self, command: str, keyword: str) -> list:
@@ -180,19 +183,9 @@ class Genesis:
 
             while True:              
                 # Check for hotword
-                f=open(self.WAKE_WORD_FILE, "r")
-                contents = f.read()
-                if contents == "1":
-                    # Stop the wake word listener
-                    self.wake_word_listener.stop_listening()
-
-                    # Set the wake word file back to "0" (neutral)
-                    f = open(self.WAKE_WORD_FILE, "w")
-                    f.write("0")
-                    f.close()
-
-                    # Start the wake word listener
-                    self.wake_word_listener.start_listening()
+                if not (self.wake_word_listener.getListening()):
+                    voice_input = self.recogniser.recognise()
+                    self.execute_command(voice_input)
 
         except Exception as e:
             print(e)

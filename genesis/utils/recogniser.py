@@ -7,7 +7,10 @@ from utils.voice import Voice
 
 class Recogniser:
 
-    def __init__(self, config: Configuration, led_array: LEDArray) -> None:
+    def __init__(self, config: Configuration, led_array: LEDArray, voice_instance: Voice) -> None:
+        # Setup TTS
+        self.voice_instance = voice_instance
+
         # Setup the configuration
         self.my_config = config.load_configuration()
         self.settings = self.my_config["settings"]
@@ -39,7 +42,7 @@ class Recogniser:
         # Start the thread
         t.start()
 
-    def recognise(self, voice_instance: Voice) -> str:
+    def recognise(self) -> str:
         """
         Run speech to text recognition,
         return the speech as a string
