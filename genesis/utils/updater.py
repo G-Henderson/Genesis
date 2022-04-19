@@ -14,6 +14,10 @@ class Updater:
         self.PLATFORM = Platforms.RASPBERRY_PI
 
     def update(self, voice_instance):
+        """
+        The main procedure for updating Genesis
+        """
+    
         # Check what platform we are on
         if (self.PLATFORM == Platforms.RASPBERRY_PI):
             # Check for Raspberry Pi OS updates
@@ -41,7 +45,7 @@ class Updater:
         restart = False
 
         # Fetch the latest code from the repo and check the status of the repo
-        command = "cd /home/pi/Genesis; git fetch; git status -uno" # Setup command
+        command = "cd /home/pi/genesis-main-old/genesis; sudo git fetch; sudo git status -uno" # Setup command
         ret = subprocess.run(command, capture_output=True, shell=True) # Run command
         output = ret.stdout.decode().split("\n") # Get the output of the command
         my_stat = output[1]
@@ -55,7 +59,7 @@ class Updater:
         else:
             # If so pull the latest code
             print("Update available...")
-            os.system("cd /home/pi/Genesis && git fetch && git pull")
+            os.system("cd /home/pi/genesis-main-old/genesis && sudo git fetch && sudo git pull")
 
             # Set restart to true
             restart = True
