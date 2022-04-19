@@ -13,7 +13,7 @@ class Module:
 
     def get_joke(self) -> str:
         # Read in the jokes array from the json file
-        my_file = open('jokes.json')
+        my_file = open('modules/viola_jokes/jokes.json')
         data = json.load(my_file)
         jokes_array = data["jokes"]
 
