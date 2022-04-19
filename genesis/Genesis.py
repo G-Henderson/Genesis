@@ -8,6 +8,7 @@ from utils.voice import Voice
 from utils.LEDArray import LEDArray
 import utils.Platforms as Platforms
 from utils.WakewordListener import WakewordListener
+from utils.updater import Updater
 
 class Genesis:
 
@@ -30,6 +31,10 @@ class Genesis:
         self.location = self.settings["location"]
         self.platform = self.settings["platform"]
         self.device = self.settings["device"]
+
+        # Setup the updater
+        self.updater = Updater()
+        self.updater.update() # Update code
 
         # Create the LED instance
         if (self.platform == Platforms.RASPBERRY_PI):
