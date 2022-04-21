@@ -1,0 +1,25 @@
+{
+  "commands": [
+    "what's the 7-day forecast",
+    "what is the 7-day forecast",
+    "what's the weather",
+    "what is the weather",
+    "what's the forecast",
+    "what is the forecast"
+  ],
+  "entry-point": "weather",
+  "languages": [
+    "en"
+  ],
+  "name": "weather",
+  "required_packages": [
+    "requests"
+  ],
+  "settings": {
+    "lat": "50.5167",
+    "long": "4.8365",
+    "units": "metric",
+    "api_key": "c1460fcccea28a14173c60475412459c"
+  },
+  "version": "0.0.1"
+}
