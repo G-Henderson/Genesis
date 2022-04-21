@@ -1,0 +1,40 @@
+{
+  "name": "homecontrol",
+  "version": "0.1.1",
+  "commands": [
+    "turn",
+    "put",
+    "temperature",
+    "is the heating",
+    "is the boiler",
+    "light",
+    "dimmer",
+    "colour temperature",
+    "colour"
+  ],
+  "entry-point": "home_control",
+  "languages": [
+    "en"
+  ],
+  "settings": {
+    "hostname": "homehub",
+    "roomname": "george's bedroom",
+    "topics": [
+      "house/ground/lounge/temperature",
+      "outside/temperature",
+      "house/first/extension/temperature",
+      "house/boiler/status",
+      "house/boiler/command/settemp",
+      "house/boiler/command/floortemp",
+      "house/boiler/command/timeslots",
+      "house/boiler/command/mode",
+      "data/general/genesis/lists",
+      "data/kitchen/genesis/volume",
+      "data/general/genesis/notification",
+      "cmnd/bedroom1/Power",
+      "stat/bedroom1/POWER",
+      "cmnd/bedroom2/Power",
+      "stat/bedroom2/POWER" 
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "datetime",
+  "version": "0.0.1",
+  "commands": [
+    "what time is it",
+    "what's the time",
+    "what day is it",
+    "what date is it",
+    "what's today's date",
+    "what's the date"
+  ],
+  "entry-point": "datetime",
+  "languages": [
+    "en"
+  ]
+}

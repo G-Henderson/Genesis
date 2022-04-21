@@ -1,0 +1,33 @@
+{
+  "name": "general",
+  "commands": [
+    "hello",
+    "hi",
+    "hey",
+    "morning",
+    "good day",
+    "afternoon",
+    "evening",
+    "night",
+    "how are you",
+    "who are you",
+    "what is your name",
+    "what's your name",
+    "nothing",
+    "go away",
+    "shut up",
+    "thanks",
+    "thank you",
+    "later alligator",
+    "see you later",
+    "bye"
+  ],
+  "entry-point": "general",
+  "languages": [
+    "en"
+  ],
+  "required_packages": [
+    "time",
+    "random"
+  ]
+}

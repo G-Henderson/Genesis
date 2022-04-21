@@ -1,0 +1,13 @@
+{
+  "name": "system",
+  "commands": [
+    "shutdown",
+    "shut down",
+    "reboot",
+    "restart"
+  ],
+  "entry-point": "system",
+  "languages": [
+    "en"
+  ]
+}

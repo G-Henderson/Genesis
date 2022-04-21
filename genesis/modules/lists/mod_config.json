@@ -1,0 +1,19 @@
+{
+  "name": "lists",
+  "version": "0.0.1",
+  "commands": [
+    "list"
+  ],
+  "entry-point": "lists",
+  "languages": [
+    "en"
+  ],
+  "settings": {
+    "list_file": "list-backup.txt",
+    "hostname": "homehub",
+    "topics": [
+      "house/ground/lounge/temperature",
+      "outside/temperature"
+    ]
+  }
+}

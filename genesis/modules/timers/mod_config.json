@@ -1,0 +1,13 @@
+{
+  "name": "timers",
+  "version": "0.0.1",
+  "commands": [
+    "set a timer",
+    "how much time",
+    "cancel"
+  ],
+  "entry-point": "timers",
+  "languages": [
+    "en"
+  ]
+}

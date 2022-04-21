@@ -1,0 +1,17 @@
+{
+  "name": "jokes",
+  "commands": [
+    "tell me a joke",
+    "tell me a funny joke",
+    "make me laugh",
+    "are you funny"
+  ],
+  "entry-point": "jokes",
+  "languages": [
+    "en"
+  ],
+  "required_packages": [
+    "time",
+    "random"
+  ]
+}

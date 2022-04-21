@@ -1,0 +1,11 @@
+{
+  "name": "timetable",
+  "version": "0.0.1",
+  "commands": [
+    "what lessons do i have"
+  ],
+  "entry-point": "timetable",
+  "languages": [
+    "en"
+  ]
+}
