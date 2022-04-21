@@ -1,0 +1,97 @@
+{
+    "a":
+    {
+        "monday":
+        [
+            "Computer Science",
+            "Computer Science",
+            "Physics",
+            "Physics",
+            "Maths",
+            "Maths"
+        ],
+        "tuesday":
+        [
+            "DT",
+            "DT",
+            "Computer Science",
+            "Computer Science",
+            "Physics",
+            "Physics"
+        ],
+        "wednesday":
+        [
+            "Maths",
+            "Maths",
+            "PHSEE",
+            "Free",
+            "Wednesday Afternoon Activities"
+        ],
+        "thursday":
+        [
+            "Physics",
+            "Physics",
+            "Free",
+            "DT",
+            "Computer Science",
+            "Computer Science"
+        ],
+        "friday":
+        [
+            "Free",
+            "Sixth Form Diploma",
+            "Maths",
+            "Maths",
+            "DT",
+            "DT"
+        ]
+    },
+
+    "b":
+    {
+        "monday":
+        [
+            "Computer Science",
+            "Computer Science",
+            "Physics",
+            "Physics",
+            "Maths",
+            "Maths"
+        ],
+        "tuesday":
+        [
+            "DT",
+            "DT",
+            "Computer Science",
+            "Computer Science",
+            "Physics",
+            "Physics"
+        ],
+        "wednesday":
+        [
+            "Maths",
+            "Maths",
+            "DT",
+            "DT",
+            "Wednesday Afternoon Activities"
+        ],
+        "thursday":
+        [
+            "Physics",
+            "Physics",
+            "DT",
+            "DT",
+            "Computer Science",
+            "Computer Science"
+        ],
+        "friday":
+        [
+            "Free",
+            "PHSEE",
+            "Maths",
+            "Maths",
+            "Free",
+            "DT"
+        ]
+    }
+}
