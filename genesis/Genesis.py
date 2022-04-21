@@ -113,6 +113,8 @@ class Genesis:
                             extra = self.alarms
                         elif str(name) == "system":
                             extra = self.timers
+                        elif str(name) == "weather":
+                            extra = self.genesis_config
                         else:
                             extra = None
 
