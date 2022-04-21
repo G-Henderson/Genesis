@@ -1,0 +1,40 @@
+{
+    "computer_jokes": [
+        {
+            "q": "Did you hear about the monkeys who shared an Amazon account?",
+            "a": "They were Prime mates."
+        },
+        {
+            "q": "Don't use 'beef stew' as a computer password.",
+            "a": "It's not stroganoff."
+        },
+        {
+            "q": "What is the biggest lie in the entire universe?",
+            "a": "I have read and agree to the Terms & Conditions."
+        },
+        {
+            "q": "What should you do after your Nintendo game ends in a tie?",
+            "a": "Ask for a Wii-match!"
+        },
+        {
+            "q": "How does a computer get drunk?",
+            "a": "It takes screenshots."
+        },
+        {
+            "q": "Why did the PowerPoint Presentation cross the road?",
+            "a": "To get to the other slide."
+        },
+        {
+            "q": "Have you heard of that new band '1023 Megabytes'?",
+            "a": "They're pretty good, but they don't have a gig just yet."
+        },
+        {
+            "q": "I just got fired from my job at the keyboard factory.",
+            "a": "They told me I wasn't putting in enough shifts."
+        },
+        {
+            "q": "Why did the computer show up at work late? ",
+            "a": "It had a hard drive."
+        }
+    ]
+}
