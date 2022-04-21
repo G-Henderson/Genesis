@@ -4,7 +4,7 @@ import datetime
 
 class Timetable():
   def __init__(self):
-    self.filename = "timetable.txt"
+    self.filename = "utils/everest/timetable.json"
     self.WEEKDAYS = ["monday", "tuesday", "wednesday", "thursday", "friday"]
 
   # Returns a list of the lessons today
@@ -18,11 +18,9 @@ class Timetable():
 
     if (day in self.WEEKDAYS):
       # Reads timetable string from file
-      file = open(self.filename, "r")
-      # Puts each line into array
-      my_array = file.readlines()
+      file = open(self.filename)
       # Converts the first item in the array to a json array
-      json_obj = json.loads(my_array[0])
+      json_obj = json.load(file)
       # Gets the list of lessons from the day of that week
       new_string = json_obj[week][day]
       # Close the file
@@ -67,11 +65,9 @@ class Timetable():
     # Check if tomorrow's date is a week day
     if (day in self.WEEKDAYS):
       # If so, open the timetable file in read mode
-      file = open(self.filename, "r")
-      # Read it into an array
-      my_array = file.readlines()
+      file = open(self.filename)
       # Convert the first line into a JSON string
-      json_obj = json.loads(my_array[0])
+      json_obj = json.load(file)
       # Get the list of subjects for the day from the json string
       new_string = json_obj[week][day]
       # Close the file

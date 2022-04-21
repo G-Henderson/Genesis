@@ -1,15 +1,32 @@
-from utils.EverestTT import Timetable
+from utils.everest.EverestTT import Timetable
+from utils.voice import Voice
 
-table = Timetable()
 
-def run(extras, command, args, voice_instance):
-    week = "b"
-    if (args[0] != "tomorrow"):
-        lessons = table.todaysLessons(week)
-        speech = table.formSpeech("Today", lessons)
-        voice_instance.say(speech)
+class Module:
 
-    else:
-        lessons = table.tomorrowsLessons(week)
-        speech = table.formSpeech("Tomorrow", lessons)
-        voice_instance.say(speech)
+    """
+    Module for adjusting the volume the device
+    """
+
+    def __init__(self, command: str, args: list, voice_instance: Voice, extras) -> None:
+        # Initialise variables from the arguments
+        self.command = command
+        self.args = args
+        self.voice = voice_instance
+        self.extras = extras
+
+        # Setup other variables
+        self.table = Timetable()
+
+    # Main procedure
+    def run(self) -> None:
+        week = "b"
+        if (self.args[0] != "tomorrow"):
+            lessons = self.table.todaysLessons(week)
+            speech = self.table.formSpeech("Today", lessons)
+            self.voice_instance.say(speech)
+
+        else:
+            lessons = self.table.tomorrowsLessons(week)
+            speech = self.table.formSpeech("Tomorrow", lessons)
+            self.voice_instance.say(speech)
